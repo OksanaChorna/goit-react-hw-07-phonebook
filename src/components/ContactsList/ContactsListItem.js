@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import contactsOperations from '../../redux/contacts/contacts-operations';
+import contactsSelectors from '../../redux/contacts/contacts-selectors';
 import style from './ContactsListItem.module.css';
 
 const ContactItem = ({ onDeleteContact, contacts }) => (
@@ -33,19 +34,19 @@ ContactItem.prototype = {
   onDeleteContact: PropTypes.func,
 };
 
-const findContact = (allContacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
+// const findContact = (allContacts, filter) => {
+//   const normalizedFilter = filter.toLowerCase();
 
-  if (filter) {
-    return allContacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
-  }
-  return allContacts;
-};
+//   if (filter) {
+//     return allContacts.filter(contact =>
+//       contact.name.toLowerCase().includes(normalizedFilter),
+//     );
+//   }
+//   return allContacts;
+// };
 
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  contacts: findContact(items, filter),
+const mapStateToProps = state => ({
+  contacts: contactsSelectors.getFilteredContact(state),
 });
 
 const mapDispatchToProps = dispatch => ({

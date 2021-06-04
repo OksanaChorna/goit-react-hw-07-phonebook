@@ -6,7 +6,7 @@ import {
   addContactError,
 } from './contacts-actions';
 
-axios.default.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 const addContact =
   ({ name, number }) =>
@@ -14,6 +14,7 @@ const addContact =
     const contact = { name, number };
 
     dispatch(addContactRequest());
+
     axios
       .post('/contacts', contact)
       .then(({ data }) => dispatch(addContactSuccess(data)))

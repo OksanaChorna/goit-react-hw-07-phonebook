@@ -12,16 +12,28 @@ import {
   fetchContactError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:3030';
 
-const fetchContacts = () => dispatch => {
+const fetchContacts = () => async dispatch => {
   dispatch(fetchContactRequest());
 
-  axios
-    .get('/contacts')
-    .then(({ data }) => dispatch(fetchContactSuccess(data)))
-    .catch(error => dispatch(fetchContactError(error)));
+  try {
+    const { data } = await axios.get('/contacts');
+
+    dispatch(fetchContactSuccess(data));
+  } catch (error) {
+    dispatch(fetchContactError(error));
+  }
 };
+
+// const fetchContacts = () => dispatch => {
+//   dispatch(fetchContactRequest());
+
+//   axios
+//     .get('/contacts')
+//     .then(({ data }) => dispatch(fetchContactSuccess(data)))
+//     .catch(error => dispatch(fetchContactError(error)));
+// };
 
 const addContact =
   ({ name, number }) =>

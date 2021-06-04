@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
-import contactsReducer from '../redux/contacts/contacts-reducer';
+import { contactsReducer } from '../redux/contacts';
 
 const middleware = [
   ...getDefaultMiddleware({

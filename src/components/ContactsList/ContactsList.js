@@ -1,4 +1,3 @@
-// import ContactItem from './ContactsListItem';
 import PropTypes from 'prop-types';
 import style from './ContactsList.module.css';
 
